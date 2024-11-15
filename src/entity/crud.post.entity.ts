@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { CrudContentDto } from 'src/dto/crud.post.req.dto';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { UserEntity } from './crud.user.entity';
 
 @Entity()
 export class PostEntity {
@@ -12,12 +12,7 @@ export class PostEntity {
     @Column()
     content: string;
 
-    @Column()
-    author: string;
-
-    insert(body: CrudContentDto) {
-        this.title = body.title;
-        this.author = body.author;
-        this.content = body.content;
-    }
+    @ManyToOne((type) => UserEntity)
+    @JoinColumn()
+    user: UserEntity;
 }

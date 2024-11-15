@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostEntity } from './entity/crud.post.entity';
 import { CrudModule } from './crud/crud.module';
 import { BoardModule } from './board/board.module';
+import { UserEntity } from './entity/crud.user.entity';
 
 @Module({
   imports: [
@@ -15,11 +16,11 @@ import { BoardModule } from './board/board.module';
     TypeOrmModule.forRoot({
       type: 'mariadb',
       host: 'localhost',
-      port: 3306,
+      port: 3307,
       username: 'root',
-      password: 'dmsrkd3517',
-      database: 'test',
-      entities: [PostEntity],
+      password: '',
+      database: 'boardDB',
+      entities: [PostEntity, UserEntity],
       synchronize: true,
     })
   ],

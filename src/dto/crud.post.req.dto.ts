@@ -1,5 +1,5 @@
-export class CrudContentDto {
+export class PostContentDto {
     title: string;
     content: string;
-    author: string;
+    userid: number;
 }
