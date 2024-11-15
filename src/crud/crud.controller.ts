@@ -18,8 +18,13 @@ export class CrudController {
     }
 
     @Post('createUser')
-    async createUser(@Body() body : UserContentDto){
+    async createUser(@Body() body: UserContentDto) {
         return await this.crudService.crateUser(body);
+    }
+
+    @Get('all')
+    async showAll() {
+        return this.crudService.showAll();
     }
 
     @Get('read')

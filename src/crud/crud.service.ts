@@ -37,6 +37,15 @@ export class CrudService {
         return await this.userEntity.save(newUser);
     }
 
+    async showAll() {
+        const data = await this.postEntity
+            .createQueryBuilder('b')
+            .select()
+            .innerJoinAndSelect('b.user', 'u')
+            .getMany();
+        return data;
+    }
+
     async readPost(id: number): Promise<PostEntity> {
         const post = await this.postEntity.findOneBy({ id });
         if (!post) {
