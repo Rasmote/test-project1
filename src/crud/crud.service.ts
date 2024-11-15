@@ -38,12 +38,11 @@ export class CrudService {
         return await this.PostEntity.save(post);
     }
 
-    // 글 삭제 (Delete)
     async deletePost(id: number): Promise<void> {
         const post = await this.PostEntity.findOneBy({ id });
         if (!post) {
             throw new NotFoundException(`${id}번째 글은 존재하지 않습니다.`);
         }
-        await this.PostEntity.delete(id);  // 해당 ID의 게시글 삭제
+        await this.PostEntity.delete(id);
     }
 }

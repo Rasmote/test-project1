@@ -29,7 +29,6 @@ export class CrudController {
         return await this.crudService.updatePost(id, body);
     }
 
-    // 글 삭제 (Delete)
     @Get('delete')
     async deletePost(@Query('id') id: number): Promise<void> {
         return await this.crudService.deletePost(id);
