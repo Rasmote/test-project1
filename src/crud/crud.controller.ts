@@ -11,18 +11,18 @@ export class CrudController {
         this.crudService = __crudService;
     }
 
-    @Post('createPost')
+    @Post('createPost') //글 생성
     async createPost(@Body() body: PostContentDto): Promise<PostEntity> {
         console.log(body);
         return await this.crudService.createPost(body);
     }
 
-    @Post('createUser')
+    @Post('createUser') //유저 생성
     async createUser(@Body() body: UserContentDto) {
         return await this.crudService.crateUser(body);
     }
 
-    @Get('all')
+    @Get('all') //모든 게시판 엔티티 표시
     async showAll() {
         return this.crudService.showAll();
     }
@@ -41,7 +41,7 @@ export class CrudController {
     }
 
     @Get('delete')
-    async deletePost(@Query('id') id: number): Promise<void> {
+    async deletePost(@Query('id') id: number): Promise<string> {
         return await this.crudService.deletePost(id);
     }
 }

@@ -55,21 +55,24 @@ export class CrudService {
     }
 
     async updatePost(id: number, body: PostContentDto): Promise<PostEntity> {
-        const post = await this.postEntity.findOneBy({ id });
-        if (!post) {
+        const tempPost = await this.postEntity.findOneBy({ id });
+        if (!tempPost) {
             throw new NotFoundException(`${id}번째 글은 존재하지 않습니다.`);
         }
-        post.title = body.title;
-        post.content = body.content;
-        //post.author = body.author;
-        return await this.postEntity.save(post);
+        tempPost.title = body.title;
+        tempPost.content = body.content;
+        const tempUserEntity = new UserEntity;
+        tempUserEntity.id = body.userid;
+        tempPost.user = tempUserEntity;
+        return await this.postEntity.save(tempPost);
     }
 
-    async deletePost(id: number): Promise<void> {
+    async deletePost(id: number): Promise<string> {
         const post = await this.postEntity.findOneBy({ id });
         if (!post) {
             throw new NotFoundException(`${id}번째 글은 존재하지 않습니다.`);
         }
         await this.postEntity.delete(id);
+        return `${id}번 글 삭제 완료.`;
     }
 }
